@@ -703,6 +703,46 @@
         p {
             text-align: justify;
         }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            * {
+                cursor: auto;
+            }
+
+            #cursor-dot,
+            #cursor-outline {
+                display: none;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .about-card {
+                padding: 2rem;
+            }
+
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        /* === FIX: Header fijo sin animaciones molestas === */
+        nav {
+            transition: none !important;
+        }
+
+        nav.nav-hidden {
+            transform: translateX(-50%) !important;
+            opacity: 1 !important;
+        }
+    
     </style>
 </head>
 
