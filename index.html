@@ -141,19 +141,19 @@
 
         /* Header / Navbar */
         nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: fixed !important;
+            top: 20px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
             width: 90%;
             max-width: 1200px;
             padding: 1rem 2rem;
-            z-index: 1001;
+            z-index: 1001 !important;
             backdrop-filter: blur(16px);
             border: var(--glass-border);
             border-radius: 100px;
             background: rgba(10, 10, 10, 0.4);
-            /* Sin transition = sin animaciones = fijo eternamente */
+            /* Sin transition = sin movimiento */
         }
 
         nav.nav-hidden {
@@ -1261,21 +1261,7 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-          // === FIX: Header fijo eternamente ===
-        (function() {
-            const nav = document.querySelector('nav');
-            if (nav) {
-                nav.style.position = 'fixed';
-                nav.style.top = '20px';
-                nav.style.left = '50%';
-                nav.style.transform = 'translateX(-50%)';
-                nav.style.transition = 'none';
-                window.addEventListener('scroll', function() {
-                    nav.style.top = '20px';
-                    nav.style.transform = 'translateX(-50%)';
-                }, { passive: true });
-            }
-        })();
+        
     </script>
 </body>
 
