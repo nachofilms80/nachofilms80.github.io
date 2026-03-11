@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -141,19 +142,19 @@
 
         /* Header / Navbar */
         nav {
-            position: fixed !important;
-            top: 20px !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 90%;
             max-width: 1200px;
             padding: 1rem 2rem;
-            z-index: 1001 !important;
+            z-index: 1001;
             backdrop-filter: blur(16px);
             border: var(--glass-border);
             border-radius: 100px;
             background: rgba(10, 10, 10, 0.4);
-            /* Sin transition = sin movimiento */
+            /* Sin transition = sin animaciones = fijo eternamente */
         }
 
         nav.nav-hidden {
@@ -762,6 +763,13 @@
     <div class="blob" id="blob-2"></div>
     <div class="blob" id="blob-3"></div>
 
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">IGNACIO FUENTES.</a>
+            <div style="font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">SANTIAGO, CHILE</div>
+        </div>
+    </nav>
+
     <div class="container">
         <header>
             <div class="hero-video-container">
@@ -771,8 +779,7 @@
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-inner reveal" style="position: relative; z-index: 2;">
-                <h1 class="gradient-text">Bienvenido a mi Portafolio</h1>
-                <span class="hero-tagline">Dirección Creativa + IA Generativa</span>
+                <h1>Portafolios<br><span class="gradient-text">NF80</span></h1>
                 <p class="hero-desc" style="text-align: center;">Redefiniendo el estándar creativo y la consistencia de
                     marca a través de sistemas
                     de Inteligencia Generativa de vanguardia.</p>
@@ -1255,7 +1262,21 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        
+          // === FIX: Header fijo eternamente ===
+        (function() {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.style.position = 'fixed';
+                nav.style.top = '20px';
+                nav.style.left = '50%';
+                nav.style.transform = 'translateX(-50%)';
+                nav.style.transition = 'none';
+                window.addEventListener('scroll', function() {
+                    nav.style.top = '20px';
+                    nav.style.transform = 'translateX(-50%)';
+                }, { passive: true });
+            }
+        })();
     </script>
 </body>
 
