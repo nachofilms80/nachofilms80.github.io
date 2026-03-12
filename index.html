@@ -1,1389 +1,467 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ignacio Fuentes | Principal Creative & AI Specialist</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #030303;
-            --accent-color: #00f2ff;
-            --secondary-accent: #7000ff;
-            --third-accent: #ff00c8;
-            --text-color: #ffffff;
-            --text-muted: #a0a0aa;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-            cursor: none;
-            /* Ocultamos cursor default para el custom */
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            /* Subtle Tech Pattern */
-            background-image:
-                radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0),
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px, 40px 40px, 40px 40px;
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Custom Cursor */
-        #cursor-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-color);
-            position: fixed;
-            top: -4px;
-            left: -4px;
-            pointer-events: none;
-            z-index: 9999;
-            border-radius: 50%;
-        }
-
-        #cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            position: fixed;
-            top: -20px;
-            left: -20px;
-            pointer-events: none;
-            z-index: 9998;
-            border-radius: 50%;
-            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
-        }
-
-        /* Noise Overlay for Cinematic Texture */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.05;
-            z-index: 1000;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-        }
-
-        /* Ambient Blobs */
-        .blob {
-            position: fixed;
-            width: 45vmax;
-            height: 45vmax;
-            filter: blur(80px);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-            transition: all 4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        #blob-1 {
-            background: radial-gradient(circle, var(--accent-color), transparent);
-            top: -20%;
-            right: -10%;
-        }
-
-        #blob-2 {
-            background: radial-gradient(circle, var(--secondary-accent), transparent);
-            bottom: -10%;
-            left: -5%;
-        }
-
-        #blob-3 {
-            background: radial-gradient(circle, var(--third-accent), transparent);
-            top: 30%;
-            left: 20%;
-            width: 30vmax;
-            height: 30vmax;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Header / Navbar */
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
-            padding: 1rem 2rem;
-            z-index: 1001;
-            backdrop-filter: blur(16px);
-            border: var(--glass-border);
-            border-radius: 100px;
-            background: rgba(10, 10, 10, 0.4);
-            /* Sin transition = sin animaciones = fijo eternamente */
-        }
-
-        nav.nav-hidden {
-            transform: translate(-50%, -100px);
-            opacity: 0;
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: -1px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        /* Hero */
-        header {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 80px;
-            padding-bottom: 15vh;
-            /* Nudge content up for better balance */
-        }
-
-        .hero-inner {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-            padding: 0 1rem;  /* ← Padding para que no se corte */
-            word-wrap: break-word;  /* ← Permite saltos de línea */
-            overflow-wrap: break-word;
-        }
-
-        .hero-tagline {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: rgba(0, 242, 255, 0.1);
-            border: 1px solid var(--accent-color);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg,
-                    #fff 0%,
-                    var(--accent-color) 25%,
-                    #fff 50%,
-                    var(--accent-color) 75%,
-                    #fff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 6s linear infinite;
-        }
-
-        .hero-video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .hero-video-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: cover;
-            opacity: 0.8;
-            /* Lo dejamos fuerte y claro */
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(3, 3, 3, 0.4) 0%, rgba(3, 3, 3, 0.7) 100%);
-            z-index: 0;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
-            letter-spacing: -2px;
-            margin-bottom: 2rem;
-            line-height: 1;
-        }
-
-        .hero-welcome {
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-            display: block;
-            font-weight: 600;
-        }
-
-        @keyframes shimmer {
-            to {
-                background-position: 200% center;
-            }
-        }
-
-        @keyframes reveal {
-            from {
-                opacity: 0;
-                transform: translate(-50%, 20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        p.hero-desc {
-            font-size: 1.4rem;
-            color: var(--text-color);
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-weight: 400;
-            line-height: 1.4;
-            letter-spacing: -0.5px;
-        }
-
-        /* Buttons */
-        .cta-group {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1.2rem 3rem;
-            border-radius: 100px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: #fff;
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.4);
-        }
-
-        .btn-outline {
-            border: 1px solid var(--card-border);
-            color: #fff;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent-color);
-            background: rgba(0, 242, 255, 0.05);
-        }
-
-        /* Video Section */
-        section {
-            padding: 120px 0;
-        }
-
-        .video-wrapper {
-            position: relative;
-            border-radius: 40px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-        }
-
-        .video-wrapper:hover {
-            transform: scale(1.02);
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            /* 16:9 */
-            height: 0;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Gallery Columns (Masonry Style) */
-        .gallery-grid {
-            column-count: 3;
-            column-gap: 1.5rem;
-        }
-
-        .gallery-item {
-            display: inline-block;
-            /* Importante para que no se corten entre columnas */
-            width: 100%;
-            margin-bottom: 1.5rem;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #111;
-            border: 1px solid var(--card-border);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--accent-color);
-            z-index: 10;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.6;
-            transition: all 0.8s ease;
-        }
-
-        .gallery-item:hover img {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-            transform: translateY(10px);
-            opacity: 0;
-            transition: all 0.4s ease;
-            pointer-events: none;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* CV Section - High Impact */
-        .cv-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
-            border: 1px solid var(--card-border);
-            border-radius: 40px;
-            padding: 6rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: transform 0.4s ease, border-color 0.4s ease;
-        }
-
-        .cv-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-5px);
-        }
-
-        .cv-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        /* Scroll Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-
-            60% {
-                transform: translateX(-50%) translateY(-5px);
-            }
-        }
-
-        /* Responsive Columns */
-        @media (max-width: 900px) {
-            .gallery-grid {
-                column-count: 2;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .gallery-grid {
-                column-count: 1;
-            }
-        }
-
-        /* Case Study Banners */
-        .case-studies {
-            margin-top: 100px;
-        }
-
-        .case-banner {
-            position: relative;
-            width: 100%;
-            min-height: 450px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 40px;
-            margin-bottom: 4rem;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            padding: 4rem;
-            gap: 4rem;
-            /* Re-using the tech pattern for the banners specifically */
-            background-image:
-                radial-gradient(circle at 2px 2px, rgba(0, 242, 255, 0.08) 1.5px, transparent 0),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px, 30px 30px, 30px 30px;
-        }
-
-        .case-banner:nth-child(even) {
-            flex-direction: row-reverse;
-            text-align: right;
-        }
-
-        .case-content {
-            flex: 1;
-            z-index: 2;
-        }
-
-        .case-content h3 {
-            font-size: 0.8rem;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .case-content h4 {
-            font-size: 2.5rem;
-            letter-spacing: -1.5px;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        .case-content p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 500px;
-        }
-
-        .case-banner:nth-child(even) .case-content p {
-            margin-left: auto;
-        }
-
-        .case-visual {
-            flex: 1.2;
-            height: 100%;
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .visual-box {
-            background: #111;
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            transition: transform 0.5s ease;
-            width: 100%;
-            /* Default to full width of container */
-        }
-
-        .visual-box:hover {
-            transform: translateY(-10px) scale(1.02);
-        }
-
-        .visual-box img {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0.9;
-        }
-
-        .workflow-full {
-            grid-column: 1 / -1;
-            margin-top: 1rem;
-        }
-
-        @media (max-width: 900px) {
-
-            .case-banner,
-            .case-banner:nth-child(even) {
-                flex-direction: column;
-                padding: 3rem 2rem;
-                text-align: left;
-                gap: 3rem;
-            }
-
-            .case-banner:nth-child(even) .case-content p {
-                margin-left: 0;
-            }
-
-            .case-visual {
-                width: 100%;
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        /* Lightbox Styles */
-        #lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        #lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        #lightbox img {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        #lightbox.active img {
-            transform: scale(1);
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            color: white;
-            font-size: 3rem;
-            font-weight: 200;
-            cursor: pointer;
-            line-height: 1;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            * {
-                cursor: auto;
-            }
-
-            #cursor-dot,
-            #cursor-outline {
-                display: none;
-            }
-
-            h1 {
-                font-size: 3.5rem;
-            }
-
-            section {
-                padding: 80px 0;
-            }
-
-            .about-card {
-                padding: 2rem;
-            }
-
-        }
-
-        p {
-            text-align: justify;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            * {
-                cursor: auto;
-            }
-
-            #cursor-dot,
-            #cursor-outline {
-                display: none;
-            }
-
-            h1 {
-                font-size: 3.5rem;
-            }
-
-            section {
-                padding: 80px 0;
-            }
-
-            .about-card {
-                padding: 2rem;
-            }
-
-        }
-
-p {
-    text-align: justify;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignacio Fuentes | Principal Creative & AI Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-color: #030303;
+--accent-color: #00f2ff;
+--secondary-accent: #7000ff;
+--third-accent: #ff00c8;
+--text-color: #ffffff;
+--text-muted: #a0a0aa;
+--card-bg: rgba(255, 255, 255, 0.03);
+--card-border: rgba(255, 255, 255, 0.1);
+--glass-border: 1px solid rgba(255, 255, 255, 0.12);
 }
-
-/* === FIX: Header fijo sin animaciones molestas === */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Outfit', sans-serif;
+cursor: none;
+}
+html { scroll-behavior: smooth; }
+body {
+background-color: var(--bg-color);
+background-image:
+radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0),
+linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+background-size: 40px 40px, 40px 40px, 40px 40px;
+color: var(--text-color);
+line-height: 1.6;
+overflow-x: hidden;
+}
+#cursor-dot {
+width: 8px; height: 8px; background: var(--accent-color);
+position: fixed; top: -4px; left: -4px;
+pointer-events: none; z-index: 9999; border-radius: 50%;
+}
+#cursor-outline {
+width: 40px; height: 40px; border: 1px solid rgba(0, 242, 255, 0.3);
+position: fixed; top: -20px; left: -20px;
+pointer-events: none; z-index: 9998; border-radius: 50%;
+transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+}
+body::before {
+content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: url("https://grainy-gradients.vercel.app/noise.svg");
+opacity: 0.05; z-index: 1000; pointer-events: none; mix-blend-mode: overlay;
+}
+.blob {
+position: fixed; width: 45vmax; height: 45vmax; filter: blur(80px);
+border-radius: 50%; z-index: -1; opacity: 0.15; pointer-events: none;
+transition: all 4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+#blob-1 { background: radial-gradient(circle, var(--accent-color), transparent); top: -20%; right: -10%; }
+#blob-2 { background: radial-gradient(circle, var(--secondary-accent), transparent); bottom: -10%; left: -5%; }
+#blob-3 { background: radial-gradient(circle, var(--third-accent), transparent); top: 30%; left: 20%; width: 30vmax; height: 30vmax; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
 nav {
-    transition: none !important;
+position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+width: 90%; max-width: 1200px; padding: 1rem 2rem; z-index: 1001;
+backdrop-filter: blur(16px); border: var(--glass-border); border-radius: 100px;
+background: rgba(10, 10, 10, 0.4); transition: none !important;
+}
+nav .container { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; color: #fff; text-decoration: none; }
+header { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; padding-bottom: 15vh; }
+.hero-inner { text-align: center; }
+h1 {
+font-size: clamp(3.5rem, 15vw, 9rem); font-weight: 900; line-height: 0.8;
+margin-bottom: 1.5rem; letter-spacing: -4px; text-transform: uppercase;
+}
+.gradient-text {
+background: linear-gradient(90deg, #fff 0%, var(--accent-color) 25%, #fff 50%, var(--accent-color) 75%, #fff 100%);
+background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+-webkit-text-fill-color: transparent; animation: shimmer 6s linear infinite;
+}
+.hero-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+.hero-video-bg {
+position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover; opacity: 0.8;
+}
+.hero-overlay {
+position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+background: linear-gradient(to bottom, rgba(3, 3, 3, 0.4) 0%, rgba(3, 3, 3, 0.7) 100%); z-index: 0;
+}
+@keyframes shimmer { to { background-position: 200% center; } }
+p.hero-desc {
+font-size: 1.4rem; color: var(--text-color); max-width: 800px;
+margin: 0 auto 3rem; font-weight: 400; line-height: 1.4; letter-spacing: -0.5px;
+}
+.btn {
+padding: 1.2rem 3rem; border-radius: 100px; font-weight: 600; text-decoration: none;
+transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: inline-block; position: relative; overflow: hidden;
+}
+.btn-primary { background: #fff; color: #000; }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(0, 242, 255, 0.4); }
+.btn-outline { border: 1px solid var(--card-border); color: #fff; }
+.btn-outline:hover { border-color: var(--accent-color); background: rgba(0, 242, 255, 0.05); }
+section { padding: 120px 0; }
+.video-wrapper {
+position: relative; border-radius: 40px; overflow: hidden; border: 1px solid var(--card-border);
+transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+}
+.video-wrapper:hover { transform: scale(1.02); }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.gallery-grid { column-count: 3; column-gap: 1.5rem; }
+.gallery-item {
+display: inline-block; width: 100%; margin-bottom: 1.5rem; position: relative;
+border-radius: 20px; overflow: hidden; background: #111; border: 1px solid var(--card-border);
+transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gallery-item:hover { transform: translateY(-8px) scale(1.02); border-color: var(--accent-color); z-index: 10; }
+.gallery-item img { width: 100%; height: auto; display: block; opacity: 0.6; transition: all 0.8s ease; }
+.gallery-item:hover img { opacity: 1; transform: scale(1.05); }
+.cv-card {
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+border: 1px solid var(--card-border); border-radius: 40px; padding: 6rem 2rem; text-align: center;
+position: relative; overflow: hidden; backdrop-filter: blur(10px);
+transition: transform 0.4s ease, border-color 0.4s ease;
+}
+.cv-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+.cv-card::before {
+content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%); pointer-events: none;
+}
+.case-studies { margin-top: 100px; }
+.case-banner {
+position: relative; width: 100%; min-height: 450px; background: var(--card-bg);
+border: 1px solid var(--card-border); border-radius: 40px; margin-bottom: 4rem; overflow: hidden;
+display: flex; align-items: center; padding: 4rem; gap: 4rem;
+background-image:
+radial-gradient(circle at 2px 2px, rgba(0, 242, 255, 0.08) 1.5px, transparent 0),
+linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+background-size: 30px 30px, 30px 30px, 30px 30px;
+}
+.case-banner:nth-child(even) { flex-direction: row-reverse; text-align: right; }
+.case-content { flex: 1; z-index: 2; }
+.case-content h3 { font-size: 0.8rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 1rem; }
+.case-content h4 { font-size: 2.5rem; letter-spacing: -1.5px; margin-bottom: 1.5rem; line-height: 1.1; }
+.case-content p { color: var(--text-muted); font-size: 1.1rem; max-width: 500px; }
+.case-banner:nth-child(even) .case-content p { margin-left: auto; }
+.case-visual { flex: 1.2; height: 100%; display: flex; gap: 1.5rem; align-items: center; justify-content: center; }
+.visual-box {
+background: #111; border-radius: 20px; border: 1px solid var(--card-border);
+overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); transition: transform 0.5s ease; width: 100%;
+}
+.visual-box:hover { transform: translateY(-10px) scale(1.02); }
+.visual-box img { width: 100%; height: auto; display: block; opacity: 0.9; }
+.workflow-full { grid-column: 1 / -1; margin-top: 1rem; }
+#lightbox {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px); z-index: 10000;
+display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease;
+}
+#lightbox.active { display: flex; opacity: 1; }
+#lightbox img {
+max-width: 90%; max-height: 85vh; border-radius: 10px;
+box-shadow: 0 0 50px rgba(0, 0, 0, 1); transform: scale(0.9);
+transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#lightbox.active img { transform: scale(1); }
+.close-lightbox {
+position: absolute; top: 30px; right: 40px; color: white;
+font-size: 3rem; font-weight: 200; cursor: pointer; line-height: 1;
 }
 
-nav.nav-hidden {
-    transform: translateX(-50%) !important;
-    opacity: 1 !important;
-}
-
-/* === RESPONSIVE MEJORADO (PARA QUE NO SE CORTE EL TEXTO) === */
+/* === RESPONSIVE MÓVIL (CURSOR SIEMPRE VISIBLE) === */
 @media (max-width: 768px) {
-    * {
-        cursor: auto;
-    }
-
-    #cursor-dot,
-    #cursor-outline {
-        display: none;
-    }
-
+    * { cursor: auto; }
+    /* ❌ SIN: #cursor-dot, #cursor-outline { display: none; } → Cursor SIEMPRE visible */
     h1 {
         font-size: clamp(2rem, 10vw, 4rem) !important;
-        letter-spacing: -2px;
-        line-height: 1.1;
-        padding: 0 1rem;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        letter-spacing: -2px; line-height: 1.1; padding: 0 1rem;
+        word-wrap: break-word; overflow-wrap: break-word;
     }
-
-    .hero-desc {
-        font-size: 1rem;
-        padding: 0 1rem;
+    .hero-desc { font-size: 1rem; padding: 0 1rem; }
+    section { padding: 80px 0; }
+    .gallery-grid { column-count: 1 !important; }
+    .case-banner, .case-banner:nth-child(even) {
+        flex-direction: column !important; padding: 2rem !important; text-align: left !important;
     }
-
-    section {
-        padding: 80px 0;
+    .case-content, .case-banner:nth-child(even) .case-content { text-align: left !important; }
+    .case-content p, .case-banner:nth-child(even) .case-content p {
+        margin-left: 0 !important; text-align: left !important;
     }
-
-    .gallery-grid {
-        column-count: 1 !important;
-    }
-
-    .case-banner,
-    .case-banner:nth-child(even) {
-        flex-direction: column !important;
-        padding: 2rem !important;
-        text-align: left !important;
-    }
-
-    .case-content,
-    .case-banner:nth-child(even) .case-content {
-        text-align: left !important;
-    }
-
-    .case-content p,
-    .case-banner:nth-child(even) .case-content p {
-        margin-left: 0 !important;
-        text-align: left !important;
-    }
-
     nav {
-        width: 100% !important;
-        top: 0 !important;
-        left: 0 !important;
-        transform: none !important;
-        border-radius: 0 !important;
-        padding: 1rem !important;
-        backdrop-filter: none !important;
-        background: rgba(3, 3, 3, 0.95) !important;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        width: 100% !important; top: 0 !important; left: 0 !important; transform: none !important;
+        border-radius: 0 !important; padding: 1rem !important; backdrop-filter: none !important;
+        background: rgba(3, 3, 3, 0.95) !important; border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-
-    nav .container div:last-child {
-        display: none;
-    }
+    nav .container div:last-child { display: none; }
 }
 
+p { text-align: justify; }
 </style>
-    
 </head>
-
 <body>
-    <!-- Lightbox Modal -->
-    <div id="lightbox">
-        <span class="close-lightbox">&times;</span>
-        <img src="" alt="Ampliada">
-    </div>
+<!-- Lightbox Modal -->
+<div id="lightbox"><span class="close-lightbox">&times;</span><img src="" alt="Ampliada"></div>
+<!-- Custom Cursor -->
+<div id="cursor-dot"></div><div id="cursor-outline"></div>
+<!-- Ambient Background -->
+<div class="blob" id="blob-1"></div><div class="blob" id="blob-2"></div><div class="blob" id="blob-3"></div>
 
-    <!-- Custom Cursor -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-outline"></div>
+<nav><div class="container">
+<a href="#" class="logo">IGNACIO FUENTES.</a>
+<div style="font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">SANTIAGO, CHILE</div>
+</div></nav>
 
-    <!-- Ambient Background System -->
-    <div class="blob" id="blob-1"></div>
-    <div class="blob" id="blob-2"></div>
-    <div class="blob" id="blob-3"></div>
+<div class="container">
+<header>
+<div class="hero-video-container">
+<video autoplay muted loop playsinline class="hero-video-bg">
+<source src="assets/videos/Loop Black.webm" type="video/webm">
+</video>
+<div class="hero-overlay"></div>
+</div>
+<div class="hero-inner reveal" style="position: relative; z-index: 2;">
+<h1>Portafolios<br><span class="gradient-text">NF80</span></h1>
+<p class="hero-desc" style="text-align: center;">Redefiniendo el estándar creativo y la consistencia de marca.</p>
+</div>
+</header>
 
-    <nav>
-        <div class="container">
-            <a href="#" class="logo">IGNACIO FUENTES.</a>
-            <div style="font-size: 0.8rem; letter-spacing: 1px; color: var(--text-muted);">SANTIAGO, CHILE</div>
-        </div>
-    </nav>
+<section id="video" class="reveal">
+<div style="margin-bottom: 50px;"><h2 style="font-size: 3.5rem; letter-spacing: -2px;">Reel</h2></div>
+<div style="margin-bottom: 3rem;">
+<div class="video-wrapper"><div class="video-container">
+<iframe src="https://player.vimeo.com/video/1171874088?h=8272103f6e&color=00f2ff&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
+</div></div></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+<div class="reveal"><div class="video-wrapper" style="border-radius: 20px;"><div class="video-container">
+<iframe src="https://player.vimeo.com/video/864593560?color=00f2ff&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
+</div></div><p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;">Archive / 2023</p></div>
+<div class="reveal"><div class="video-wrapper" style="border-radius: 20px;"><div class="video-container">
+<iframe src="https://player.vimeo.com/video/413774275?color=00f2ff&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
+</div></div><p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;">Archive / 2020</p></div>
+</div>
+</section>
 
-    <div class="container">
-        <header>
-            <div class="hero-video-container">
-                <video autoplay muted loop playsinline class="hero-video-bg">
-                    <source src="assets/videos/Loop Black.webm" type="video/webm">
-                </video>
-                <div class="hero-overlay"></div>
-            </div>
-            <div class="hero-inner reveal" style="position: relative; z-index: 2;">
-                <h1>Bienvenidos<br><span class="gradient-text">a mi portafolio</span></h1>
-                <p class="hero-desc" style="text-align: center;">
-                </p>
-            </div>
-        </header>
+<section id="galeria" class="reveal">
+<div style="margin-bottom: 50px;"><h2 style="font-size: 3.5rem; letter-spacing: -2px;">Galería</h2></div>
+<div class="gallery-grid">
+<div class="gallery-item reveal"><img src="assets/images/portfolio-01.jpg" alt="AI Mastery 01" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-02.jpg" alt="AI Mastery 02" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-03.jpg" alt="AI Mastery 03" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-04.jpg" alt="AI Mastery 04" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-05.jpg" alt="AI Mastery 05" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-06.jpg" alt="AI Mastery 06" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-07.jpg" alt="AI Mastery 07" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-08.jpg" alt="AI Mastery 08" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-09.jpg" alt="AI Mastery 09" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-010.jpg" alt="AI Mastery 10" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-011.jpg" alt="AI Mastery 11" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-012.jpg" alt="AI Mastery 12" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-013.jpg" alt="AI Mastery 13" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-014.jpg" alt="AI Mastery 14" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-015.jpg" alt="AI Mastery 15" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-016.jpg" alt="AI Mastery 16" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-017.jpg" alt="AI Mastery 17" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-018.jpg" alt="AI Mastery 18" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-019.jpg" alt="AI Mastery 19" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-020.jpg" alt="AI Mastery 20" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-021.jpg" alt="AI Mastery 21" loading="lazy"></div>
+<div class="gallery-item reveal"><img src="assets/images/portfolio-022.jpg" alt="AI Mastery 22" loading="lazy"></div>
+</div>
+</section>
 
+<section id="engine-room" class="reveal" style="padding: 100px 0;">
+<div style="border: 1px solid var(--accent-color); background: rgba(0, 242, 255, 0.01); padding: 3rem 4rem; position: relative; overflow: hidden; border-radius: 40px;">
+<div style="position: absolute; top: 0; right: 0; padding: 10px; font-family: monospace; font-size: 0.6rem; color: var(--accent-color); opacity: 0.5; letter-spacing: 2px;">ESTADO: SOBERANÍA TÉCNICA // NÚCLEO_ENCRIPTADO</div>
+<h2 style="font-size: 4rem; letter-spacing: -3px; margin-bottom: 3rem; text-transform: uppercase;">Engine Room</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem;">
+<div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Orquestación de Flujo</h3>
+<div style="border-left: 2px solid var(--accent-color); padding-left: 20px; font-family: monospace; font-size: 0.9rem; line-height: 2;">
+<div style="opacity: 0.5;">01. CURATORÍA DE REFERENCIAS EXPERTAS</div>
+<div style="color: #fff;">02. ANÁLISIS SEMÁNTICO Y ORQUESTACIÓN</div>
+<div style="color: var(--accent-color); font-weight: 800;">03. VALIDACIÓN DE ESTRUCTURA GENÉTICA</div>
+<div style="opacity: 0.5;">04. ADAPTACIÓN SEMÁNTICA MULTI-MODELO</div>
+<div style="color: #fff;">05. PROTOCOLO DE PERSISTENCIA INDUSTRIAL</div>
+<div style="background: var(--accent-color); color: #000; font-weight: 800; padding: 0 5px; display: inline-block;">06. DIRECCIÓN Y POST-PRODUCCIÓN HUMANA</div>
+</div></div>
+<div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Especificaciones Quirúrgicas</h3>
+<div style="display: grid; grid-template-columns: 1fr; gap: 1rem; font-family: monospace; font-size: 0.8rem;">
+<div style="border: 1px solid #222; padding: 15px; border-radius: 20px;">
+<span style="display: block; opacity: 0.5; margin-bottom: 5px;">FOTOGRAFÍA_DE_PRODUCTO</span>
+<span style="display: block; color: var(--accent-color);">CALIBRACIÓN ÓPTICA Y LUMÍNICA</span>
+<span style="display: block;">DIRECCIÓN DE LUZ | MACRO_ENGINEERING</span></div>
+<div style="border: 1px solid #222; padding: 15px; border-radius: 20px;">
+<span style="display: block; opacity: 0.5; margin-bottom: 5px;">ARQUITECTURA_DE_PERSONAJES</span>
+<span style="display: block; color: var(--accent-color);">CONSISTENCIA DE DNA Y TEXTURA</span>
+<span style="display: block;">NEURAL_ANATOMY | STRUCTURAL_INTEGRITY</span></div>
+<div style="border: 1px solid #222; padding: 15px; border-radius: 20px;">
+<span style="display: block; opacity: 0.5; margin-bottom: 5px;">DIRECCIÓN_CINEMATOGRÁFICA</span>
+<span style="display: block; color: var(--accent-color);">TEMPORAL_CONSISTENCY | COMFYUI</span>
+<span style="display: block;">OPEN_MODELS | HARDCORE_PROMPTING</span></div>
+</div></div>
+<div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Eficiencia Industrial</h3>
+<div style="border: 1px solid rgba(255, 77, 79, 0.2); padding: 20px; font-family: monospace; font-size: 0.8rem; background: rgba(255, 77, 79, 0.02); border-radius: 20px;">
+<div style="margin-bottom: 15px;">
+<span style="display: block; color: #ff4d4f; font-weight: 800; margin-bottom: 5px;">FLUIDEZ_SEMÁNTICA_AGNOSTICA</span>
+<p style="opacity: 0.7; font-size: 0.8rem;">Adaptación del lenguaje experto a diversas arquitecturas de modelos para el control absoluto del resultado final.</p></div>
+<div>
+<span style="display: block; color: #ff4d4f; font-weight: 800; margin-bottom: 5px;">OPTIMIZACIÓN_DE_RECURSOS</span>
+<p style="opacity: 0.7; font-size: 0.8rem;">Gestión inteligente de hardware y latencia. Escalabilidad de alta performance diseñada para producción real de alto nivel.</p></div>
+</div></div>
+</div>
+<div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #222;">
+<p style="font-size: 0.9rem; color: var(--text-muted); max-width: 800px;">
+<span style="color: var(--accent-color); font-weight: 800; display: block; margin-bottom: 10px;">DIRECTIVA DE AUTORÍA:</span>
+Cada pieza estática en el portafolio, así como las secuencias dinámicas del **Reel 2026** (orquestadas nativamente en ComfyUI con modelos abiertos), son el resultado de una **Ingeniería Inversa Semántica** y **Prompting Puro y Duro**. Utilizamos flujos orquestados con fórmulas propietarias para traducir visiones creativas en instrucciones de ultra-detalle. No dependemos de herramientas "mágicas" de un solo clic ni del azar; operamos bajo una dirección audiovisual experta que dicta cada fotón, frame y milímetro de profundidad de campo. Mostramos el proceso, pero el secreto es nuestra fórmula.
+</p></div>
+</div>
+</section>
 
-        <!-- Video Showreel Section -->
-        <section id="video" class="reveal">
-            <div style="margin-bottom: 50px;">
-                <h2 style="font-size: 3.5rem; letter-spacing: -2px;">Reel</h2>
-            </div>
+<section id="procesos" class="reveal">
+<div class="case-studies">
+<div style="margin-bottom: 50px;"><h2 style="font-size: 3.5rem; letter-spacing: -2px;">Caso de Estudio</h2></div>
+<div class="case-banner reveal" style="border: 2px solid var(--accent-color); background: rgba(0, 242, 255, 0.02); border-radius: 40px; padding: 2.5rem 4rem;">
+<div class="case-content">
+<div style="text-align: right;"><h3 style="background: var(--accent-color); color: #000; display: inline-block; padding: 2px 10px; font-weight: 800; margin-bottom: 1.5rem; border-radius: 5px;">ESTRATEGIA 01</h3></div>
+<h4 style="font-size: 3rem; margin-bottom: 1rem; text-align: right;">DELIA:<br>EL DOMINIO DE LA NORMALIDAD</h4>
+<p style="font-size: 1.1rem; color: var(--accent-color); font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; text-align: right;">Activo Digital Propietario</p>
+<p style="margin-bottom: 2rem; color: var(--text-muted); text-align: right;">La perfección sintética es trivial. El verdadero reto técnico es la **normalidad con alma**. Hemos desarrollado a DeliA bajo un protocolo de persistencia genética del 100%, creando una embajadora que no solo es visualmente humana, sino estratégicamente eficiente.</p>
+</div>
+<div class="case-visual" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+<div class="visual-box" style="position: relative;"><img src="assets/images/case-delia-01.jpg" alt="DeliA Portrait 01">
+<span style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--accent-color); font-size: 0.5rem; padding: 2px 5px; font-family: monospace; border: 1px solid var(--accent-color); border-radius: 4px;">GENETIC_DNA_LOCK</span></div>
+<div class="visual-box" style="position: relative;"><img src="assets/images/case-delia-02.jpg.png" alt="DeliA Shot 02">
+<span style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--accent-color); font-size: 0.5rem; padding: 2px 5px; font-family: monospace; border: 1px solid var(--accent-color); border-radius: 4px;">NEURAL_TEXTURE_MAP</span></div>
+<div class="visual-box" style="position: relative;"><img src="assets/images/case-delia-03.jpg" alt="DeliA Shot 03">
+<span style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--accent-color); font-size: 0.5rem; padding: 2px 5px; font-family: monospace; border: 1px solid var(--accent-color); border-radius: 4px;">100%_PERSISTENCE</span></div>
+<div class="workflow-full" style="display: flex; flex-direction: column; gap: 1rem;">
+<div class="visual-box" style="border: 1px solid var(--accent-color); border-radius: 20px; overflow: hidden; background: #080808;">
+<img src="assets/images/case-comfyui-01.jpg.png" alt="ComfyUI Workflow">
+<div style="background: var(--accent-color); color: #000; font-size: 0.8rem; font-weight: 900; padding: 8px; text-align: center; text-transform: uppercase;">PIPELINE DE PRODUCCIÓN SOBERANA</div></div>
+<div style="padding: 1rem 0; text-align: left; display: flex; flex-direction: column; gap: 2rem;">
+<div><span style="display: block; color: var(--accent-color); font-weight: 800; font-size: 1.4rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: -0.5px;">VALOR ESTRATÉGICO</span>
+<p style="font-size: 0.95rem; font-weight: 400; opacity: 0.9; text-align: left; margin: 0; color: #fff; line-height: 1.5;">Reducción de costos de producción en un 80%. Soberanía total sobre la imagen de marca.</p></div>
+<div><span style="display: block; color: var(--accent-color); font-weight: 800; font-size: 1.4rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: -0.5px;">CONTROL TÉCNICO</span>
+<p style="font-size: 0.95rem; font-weight: 400; opacity: 0.9; text-align: left; margin: 0; color: #fff; line-height: 1.5;">Entrenamiento de LoRAs específicas para consistencia absoluta en cualquier escenario.</p></div>
+</div></div>
+</div>
+</div>
+</div>
+</section>
 
-            <!-- REEL PRINCIPAL (2026) -->
-            <div style="margin-bottom: 3rem;">
-                <div class="video-wrapper">
-                    <div class="video-container">
-                        <iframe
-                            src="https://player.vimeo.com/video/1171874088?h=8272103f6e&color=00f2ff&title=0&byline=0&portrait=0"
-                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
-                            allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
+<section id="cv" class="reveal">
+<div class="cv-card" style="border-width: 2px;">
+<h2 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 2rem; letter-spacing: -3px; text-transform: uppercase; word-break: break-word;">Trayectoria & Estrategia</h2>
+<p style="color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">20 años en la primera línea de la industria creativa, ahora liderando la transición hacia la producción generativa de alto nivel.</p>
+<a href="assets/docs/cv.pdf" type="application/pdf" target="_blank" class="btn btn-primary" style="padding: 1.5rem 4rem; font-size: 1rem; letter-spacing: 2px;">VER TRAYECTORIA (PDF)</a>
+</div>
+</section>
 
-            <!-- PROVEN TRACK RECORD (2023 & 2020) -->
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-                <div class="reveal">
-                    <div class="video-wrapper" style="border-radius: 20px;">
-                        <div class="video-container">
-                            <iframe
-                                src="https://player.vimeo.com/video/864593560?color=00f2ff&title=0&byline=0&portrait=0"
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
-                                allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <p
-                        style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;">
-                        Archive / 2023</p>
-                </div>
-                <div class="reveal">
-                    <div class="video-wrapper" style="border-radius: 20px;">
-                        <div class="video-container">
-                            <iframe
-                                src="https://player.vimeo.com/video/413774275?color=00f2ff&title=0&byline=0&portrait=0"
-                                frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy"
-                                allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    <p
-                        style="font-size: 0.7rem; color: var(--text-muted); margin-top: 10px; text-transform: uppercase; letter-spacing: 2px;">
-                        Archive / 2020</p>
-                </div>
-          
-        </section>
+<footer id="contacto">
+<div style="padding-bottom: 4rem; text-align: center;">
+<h3 style="font-size: 3rem; margin-bottom: 2rem; letter-spacing: -2px; text-transform: uppercase;">Contacto</h3>
+<div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
+<a href="mailto:nachofilms80@gmail.com" style="color: var(--accent-color); font-size: 1.5rem; text-decoration: none; border-bottom: 2px solid var(--accent-color); font-weight: 800;">nachofilms80@gmail.com</a>
+<a href="tel:+56981563385" style="color: #fff; font-size: 1rem; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;">+56 9 8156 3385</a>
+<a href="https://www.linkedin.com/in/nff80" target="_blank" style="color: #fff; font-size: 1rem; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;">linkedin.com/in/nff80</a>
+</div>
+</div>
+</footer>
+</div>
 
-        <!-- Gallery Section -->
-        <section id="galeria" class="reveal">
-            <div style="margin-bottom: 50px;">
-                <h2 style="font-size: 3.5rem; letter-spacing: -2px;">Galería</h2>
-            </div>
-            <div class="gallery-grid">
-                <!-- Imagen 01 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-01.jpg" alt="AI Mastery 01" loading="lazy">
-                </div>
-                <!-- Imagen 02 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-02.jpg" alt="AI Mastery 02" loading="lazy">
-                </div>
-                <!-- Imagen 03 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-03.jpg" alt="AI Mastery 03" loading="lazy">
-                </div>
-                <!-- Imagen 04 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-04.jpg" alt="AI Mastery 04" loading="lazy">
-                </div>
-                <!-- Imagen 05 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-05.jpg" alt="AI Mastery 05" loading="lazy">
-                </div>
-                <!-- Imagen 06 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-06.jpg" alt="AI Mastery 06" loading="lazy">
-                </div>
-                <!-- Imagen 07 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-07.jpg" alt="AI Mastery 07" loading="lazy">
-                </div>
-                <!-- Imagen 08 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-08.jpg" alt="AI Mastery 08" loading="lazy">
-                </div>
-                <!-- Imagen 09 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-09.jpg" alt="AI Mastery 09" loading="lazy">
-                </div>
-                <!-- Imagen 10 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-010.jpg" alt="AI Mastery 10" loading="lazy">
-                </div>
-                <!-- Imagen 11 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-011.jpg" alt="AI Mastery 11" loading="lazy">
-                </div>
-                <!-- Imagen 12 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-012.jpg" alt="AI Mastery 12" loading="lazy">
-                </div>
-                <!-- Imagen 13 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-013.jpg" alt="AI Mastery 13" loading="lazy">
-                </div>
-                <!-- Imagen 14 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-014.jpg" alt="AI Mastery 14" loading="lazy">
-                </div>
-                <!-- Imagen 15 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-015.jpg" alt="AI Mastery 15" loading="lazy">
-                </div>
-                <!-- Imagen 16 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-016.jpg" alt="AI Mastery 16" loading="lazy">
-                </div>
-                <!-- Imagen 17 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-017.jpg" alt="AI Mastery 17" loading="lazy">
-                </div>
-                <!-- Imagen 18 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-018.jpg" alt="AI Mastery 18" loading="lazy">
-                </div>
-                <!-- Imagen 19 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-019.jpg" alt="AI Mastery 19" loading="lazy">
-                </div>
-                <!-- Imagen 20 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-020.jpg" alt="AI Mastery 20" loading="lazy">
-                </div>
-                <!-- Imagen 21 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-021.jpg" alt="AI Mastery 21" loading="lazy">
-                </div>
-                <!-- Imagen 22 -->
-                <div class="gallery-item reveal">
-                    <img src="assets/images/portfolio-022.jpg" alt="AI Mastery 22" loading="lazy">
-                </div>
-            </div>
-        </section>
+<script>
+// === CURSOR (SIEMPRE VISIBLE) ===
+const dot = document.getElementById('cursor-dot');
+const outline = document.getElementById('cursor-outline');
+const blobs = [document.getElementById('blob-1'), document.getElementById('blob-2'), document.getElementById('blob-3')];
+let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
 
-        <!-- THE ENGINE ROOM Section (Technical Sovereignty) -->
-        <section id="engine-room" class="reveal" style="padding: 100px 0;">
-            <div
-                style="border: 1px solid var(--accent-color); background: rgba(0, 242, 255, 0.01); padding: 3rem 4rem; position: relative; overflow: hidden; border-radius: 40px;">
-                <div
-                    style="position: absolute; top: 0; right: 0; padding: 10px; font-family: monospace; font-size: 0.6rem; color: var(--accent-color); opacity: 0.5; letter-spacing: 2px;">
-                    ESTADO: SOBERANÍA TÉCNICA // NÚCLEO_ENCRIPTADO</div>
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    blobs.forEach((b, i) => {
+        b.animate({ transform: `translate(${(mouseX - window.innerWidth / 2) / (10 + i)}px, ${(mouseY - window.innerHeight / 2) / (10 + i)}px)` }, { duration: 3000 + (i * 1000), fill: "forwards" });
+    });
+});
+function animateCursor() {
+    let dx = mouseX - cursorX, dy = mouseY - cursorY;
+    cursorX += dx * 0.15; cursorY += dy * 0.15;
+    outline.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
 
-                <h2 style="font-size: 4rem; letter-spacing: -3px; margin-bottom: 3rem; text-transform: uppercase;">
-                    Engine Room</h2>
+document.querySelectorAll('a, button, .gallery-item, .video-wrapper').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        outline.style.width = '80px'; outline.style.height = '80px';
+        outline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        outline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(2)`;
+    });
+    el.addEventListener('mouseleave', () => {
+        outline.style.width = '40px'; outline.style.height = '40px';
+        outline.style.backgroundColor = 'transparent';
+        outline.style.borderColor = 'rgba(0, 242, 255, 0.3)';
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(1)`;
+    });
+});
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem;">
-                    <!-- Orchestration Workflow -->
-                    <div>
-                        <h3
-                            style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">
-                            // Orquestación de Flujo</h3>
-                        <div
-                            style="border-left: 2px solid var(--accent-color); padding-left: 20px; font-family: monospace; font-size: 0.9rem; line-height: 2;">
-                            <div style="opacity: 0.5;">01. CURATORÍA DE REFERENCIAS EXPERTAS</div>
-                            <div style="color: #fff;">02. ANÁLISIS SEMÁNTICO Y ORQUESTACIÓN</div>
-                            <div style="color: var(--accent-color); font-weight: 800;">03. VALIDACIÓN DE ESTRUCTURA
-                                GENÉTICA</div>
-                            <div style="opacity: 0.5;">04. ADAPTACIÓN SEMÁNTICA MULTI-MODELO</div>
-                            <div style="color: #fff;">05. PROTOCOLO DE PERSISTENCIA INDUSTRIAL</div>
-                            <div
-                                style="background: var(--accent-color); color: #000; font-weight: 800; padding: 0 5px; display: inline-block;">
-                                06. DIRECCIÓN Y POST-PRODUCCIÓN HUMANA</div>
-                        </div>
-                    </div>
+// === LIGHTBOX (SIN OCULTAR CURSOR) ===
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+const closeBtn = document.querySelector('.close-lightbox');
 
-                    <!-- Technical Specs -->
-                    <div>
-                        <h3
-                            style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">
-                            // Especificaciones Quirúrgicas</h3>
-                        <div
-                            style="display: grid; grid-template-columns: 1fr; gap: 1rem; font-family: monospace; font-size: 0.8rem;">
-                            <div style="border: 1px solid #222; padding: 15px; border-radius: 20px;">
-                                <span
-                                    style="display: block; opacity: 0.5; margin-bottom: 5px;">FOTOGRAFÍA_DE_PRODUCTO</span>
-                                <span style="display: block; color: var(--accent-color);">CALIBRACIÓN ÓPTICA Y
-                                    LUMÍNICA</span>
-                                <span style="display: block;">DIRECCIÓN DE LUZ | MACRO_ENGINEERING</span>
-                            </div>
-                            <div style="border: 1px solid #222; padding: 15px; border-radius: 20px;">
-                                <span
-                                    style="display: block; opacity: 0.5; margin-bottom: 5px;">ARQUITECTURA_DE_PERSONAJES</span>
-                                <span style="display: block; color: var(--accent-color);">CONSISTENCIA DE DNA Y
-                                    TEXTURA</span>
-                                <span style="display: block;">NEURAL_ANATOMY | STRUCTURAL_INTEGRITY</span>
-                            </div>
-                            <div style="border: 1px solid #222; padding: 15px; border-radius: 20px;">
-                                <span
-                                    style="display: block; opacity: 0.5; margin-bottom: 5px;">DIRECCIÓN_CINEMATOGRÁFICA</span>
-                                <span style="display: block; color: var(--accent-color);">TEMPORAL_CONSISTENCY |
-                                    COMFYUI</span>
-                                <span style="display: block;">OPEN_MODELS | HARDCORE_PROMPTING</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Industrial Efficiency -->
-                    <div>
-                        <h3
-                            style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">
-                            // Eficiencia Industrial</h3>
-                        <div
-                            style="border: 1px solid rgba(255, 77, 79, 0.2); padding: 20px; font-family: monospace; font-size: 0.8rem; background: rgba(255, 77, 79, 0.02); border-radius: 20px;">
-                            <div style="margin-bottom: 15px;">
-                                <span
-                                    style="display: block; color: #ff4d4f; font-weight: 800; margin-bottom: 5px;">FLUIDEZ_SEMÁNTICA_AGNOSTICA</span>
-                                <p style="opacity: 0.7; font-size: 0.8rem;">Adaptación del lenguaje experto a diversas
-                                    arquitecturas de modelos para el control absoluto del resultado final.</p>
-                            </div>
-                            <div>
-                                <span
-                                    style="display: block; color: #ff4d4f; font-weight: 800; margin-bottom: 5px;">OPTIMIZACIÓN_DE_RECURSOS</span>
-                                <p style="opacity: 0.7; font-size: 0.8rem;">Gestión inteligente de hardware y latencia.
-                                    Escalabilidad de alta performance diseñada para producción real de alto nivel.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #222;">
-                    <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 800px;">
-                        <span
-                            style="color: var(--accent-color); font-weight: 800; display: block; margin-bottom: 10px;">DIRECTIVA
-                            DE AUTORÍA:</span>
-                        Cada pieza estática en el portafolio, así como las secuencias dinámicas del **Reel 2026**
-                        (orquestadas nativamente en ComfyUI con modelos abiertos), son el resultado de una **Ingeniería
-                        Inversa Semántica** y **Prompting Puro y Duro**. Utilizamos flujos orquestados con fórmulas
-                        propietarias para traducir visiones creativas en instrucciones de ultra-detalle. No dependemos
-                        de herramientas "mágicas" de un solo clic ni del azar; operamos bajo una dirección audiovisual
-                        experta que dicta cada fotón, frame y milímetro de profundidad de campo. Mostramos el proceso,
-                        pero el secreto es nuestra fórmula.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Case Studies Section (DeliA Process) -->
-        <section id="procesos" class="reveal">
-            <div class="case-studies">
-                <div style="margin-bottom: 50px;">
-                    <h2 style="font-size: 3.5rem; letter-spacing: -2px;">Caso de Estudio</h2>
-                </div>
-
-                <!-- Case 1: Character Consistency -->
-                <div class="case-banner reveal"
-                    style="border: 2px solid var(--accent-color); background: rgba(0, 242, 255, 0.02); border-radius: 40px; padding: 2.5rem 4rem;">
-                    <div class="case-content">
-                        <div style="text-align: right;">
-                            <h3
-                                style="background: var(--accent-color); color: #000; display: inline-block; padding: 2px 10px; font-weight: 800; margin-bottom: 1.5rem; border-radius: 5px;">
-                                CONSISTENCIA</h3>
-                        </div>
-                        <h4 style="font-size: 3rem; margin-bottom: 1rem; text-align: right;">CASO 1:<br>EL DOMINIO DE LA
-                            NORMALIDAD</h4>
-                        <p
-                            style="font-size: 1.1rem; color: var(--accent-color); font-weight: 800; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; text-align: right;">
-                            Activo Digital Propietario</p>
-                        <p style="margin-bottom: 2rem; color: var(--text-muted); text-align: right;">
-                            La optimización sintética es trivial. El verdadero reto técnico es la consistencia y
-                            persistencia de personaje, creando un embajadora que no solo es visualmente humana, 
-                            sino estratégicamente eficiente.
-                        </p>
-
-                    </div>
-                    <div class="case-visual" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
-                        <!-- Row 1 -->
-                        <div class="visual-box" style="position: relative;">
-                            <img src="assets/images/case-delia-01.jpg" alt="DeliA Portrait 01">
-                            <span
-                                style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--accent-color); font-size: 0.5rem; padding: 2px 5px; font-family: monospace; border: 1px solid var(--accent-color); border-radius: 4px;">GENETIC_DNA_LOCK</span>
-                        </div>
-                        <div class="visual-box" style="position: relative;">
-                            <img src="assets/images/case-delia-02.jpg.png" alt="DeliA Shot 02">
-                            <span
-                                style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--accent-color); font-size: 0.5rem; padding: 2px 5px; font-family: monospace; border: 1px solid var(--accent-color); border-radius: 4px;">NEURAL_TEXTURE_MAP</span>
-                        </div>
-                        <div class="visual-box" style="position: relative;">
-                            <img src="assets/images/case-delia-03.jpg" alt="DeliA Shot 03">
-                            <span
-                                style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: var(--accent-color); font-size: 0.5rem; padding: 2px 5px; font-family: monospace; border: 1px solid var(--accent-color); border-radius: 4px;">100%_PERSISTENCE</span>
-                        </div>
-                        <!-- Workflow context (Full Width) -->
-                        <div class="workflow-full" style="display: flex; flex-direction: column; gap: 1rem;">
-                            <!-- Workflow Image Box -->
-                            <div class="visual-box"
-                                style="border: 1px solid var(--accent-color); border-radius: 20px; overflow: hidden; background: #080808;">
-                                <img src="assets/images/case-comfyui-01.jpg.png" alt="ComfyUI Workflow">
-                                <div
-                                    style="background: var(--accent-color); color: #000; font-size: 0.8rem; font-weight: 900; padding: 8px; text-align: center; text-transform: uppercase;">
-                                    PIPELINE DE PRODUCCIÓN</div>
-                            </div>
-
-                            <!-- Workflow Text Box -->
-                            <div
-                                style="padding: 1rem 0; text-align: left; display: flex; flex-direction: column; gap: 2rem;">
-                                <div>
-                                    <span
-                                        style="display: block; color: var(--accent-color); font-weight: 800; font-size: 1.4rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: -0.5px;">VALOR
-                                        ESTRATÉGICO</span>
-                                    <p
-                                        style="font-size: 0.95rem; font-weight: 400; opacity: 0.9; text-align: left; margin: 0; color: #fff; line-height: 1.5;">
-                                        Reducción de costos de producción en un 80%. Soberanía total sobre la imagen de
-                                        marca.</p>
-                                </div>
-                                <div>
-                                    <span
-                                        style="display: block; color: var(--accent-color); font-weight: 800; font-size: 1.4rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: -0.5px;">CONTROL
-                                        TÉCNICO</span>
-                                    <p
-                                        style="font-size: 0.95rem; font-weight: 400; opacity: 0.9; text-align: left; margin: 0; color: #fff; line-height: 1.5;">
-                                        Entrenamiento de LoRAs específicas para consistencia absoluta en cualquier
-                                        escenario.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="cv" class="reveal">
-            <div class="cv-card" style="border-width: 2px;">
-                <h2
-                    style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 2rem; letter-spacing: -3px; text-transform: uppercase; word-break: break-word;">
-                    Trayectoria & Estrategia</h2>
-                <p
-                    style="color: var(--text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">
-                    20 años en la primera línea de la industria creativa, ahora liderando la transición hacia la
-                    producción generativa de alto nivel.</p>
-                <a href="assets/docs/cv.pdf"  type="application/pdf"  type="application/pdf"  target="_blank" class="btn btn-primary"
-                    style="padding: 1.5rem 4rem; font-size: 1rem; letter-spacing: 2px;">VER TRAYECTORIA (PDF)</a>
-            </div>
-        </section>
-
-        <footer id="contacto">
-            <div style="padding-bottom: 4rem; text-align: center;">
-                <h3 style="font-size: 3rem; margin-bottom: 2rem; letter-spacing: -2px; text-transform: uppercase;">
-                    Contacto</h3>
-                <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
-                    <a href="mailto:nachofilms80@gmail.com"
-                        style="color: var(--accent-color); font-size: 1.5rem; text-decoration: none; border-bottom: 2px solid var(--accent-color); font-weight: 800;">nachofilms80@gmail.com</a>
-                    <a href="tel:+56981563385"
-                        style="color: #fff; font-size: 1rem; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;">+56
-                        9 8156 3385</a>
-                    <a href="https://www.linkedin.com/in/nff80" target="_blank"
-                        style="color: #fff; font-size: 1rem; text-decoration: none; opacity: 0.8; transition: opacity 0.3s;">linkedin.com/in/nff80</a>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-   <script>
-    // === DETECCIÓN DE DISPOSITIVO TÁCTIL ===
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    // === CURSOR (SOLO SI NO ES TÁCTIL) ===
-    if (!isTouchDevice) {
-        const dot = document.getElementById('cursor-dot');
-        const outline = document.getElementById('cursor-outline');
-        const blobs = [
-            document.getElementById('blob-1'),
-            document.getElementById('blob-2'),
-            document.getElementById('blob-3')
-        ];
-
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-
-            blobs.forEach((b, i) => {
-                b.animate({
-                    transform: `translate(${(mouseX - window.innerWidth / 2) / (10 + i)}px, ${(mouseY - window.innerHeight / 2) / (10 + i)}px)`
-                }, { duration: 3000 + (i * 1000), fill: "forwards" });
-            });
-        });
-
-        function animateCursor() {
-            let dx = mouseX - cursorX;
-            let dy = mouseY - cursorY;
-            cursorX += dx * 0.15;
-            cursorY += dy * 0.15;
-            outline.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Efecto magnético (CORREGIDO: sin acumular scale)
-        document.querySelectorAll('a, button, .gallery-item, .video-wrapper').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                outline.style.width = '80px';
-                outline.style.height = '80px';
-                outline.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                outline.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-                dot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(2)`;
-            });
-            el.addEventListener('mouseleave', () => {
-                outline.style.width = '40px';
-                outline.style.height = '40px';
-                outline.style.backgroundColor = 'transparent';
-                outline.style.borderColor = 'rgba(0, 242, 255, 0.3)';
-                dot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(1)`;
-            });
-        });
-    } else {
-        // En móvil: ocultar cursor custom de una vez
-        const dot = document.getElementById('cursor-dot');
-        const outline = document.getElementById('cursor-outline');
-        if (dot) dot.style.display = 'none';
-        if (outline) outline.style.display = 'none';
-    }
-
-    // === LIGHTBOX ROBUSTO ===
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = lightbox.querySelector('img');
-    const closeBtn = document.querySelector('.close-lightbox');
-
-    function showCursor() {
-        if (!isTouchDevice) {
-            const outline = document.getElementById('cursor-outline');
-            const dot = document.getElementById('cursor-dot');
-            if (outline) outline.style.display = 'block';
-            if (dot) dot.style.display = 'block';
-        }
-        document.body.style.overflow = 'auto'; // Reactivar scroll
-    }
-
-    function hideCursor() {
-        if (!isTouchDevice) {
-            const outline = document.getElementById('cursor-outline');
-            const dot = document.getElementById('cursor-dot');
-            if (outline) outline.style.display = 'none';
-            if (dot) dot.style.display = 'none';
-        }
-        document.body.style.overflow = 'hidden'; // Desactivar scroll
-    }
-
-    function openLightbox(src) {
-        lightboxImg.src = src;
+document.querySelectorAll('.gallery-item img, .visual-box img').forEach(img => {
+    img.addEventListener('click', (e) => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
         lightbox.classList.add('active');
-        hideCursor();
-    }
-
-    function closeLightbox() {
+        document.body.style.overflow = 'hidden';
+        // ❌ SIN: outline.style.display = 'none' / dot.style.display = 'none'
+    });
+});
+if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         lightbox.classList.remove('active');
-        showCursor();
+        document.body.style.overflow = 'auto';
+    });
+}
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === lightboxImg) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
-
-    // Abrir lightbox
-    document.querySelectorAll('.gallery-item img, .visual-box img').forEach(img => {
-        img.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openLightbox(img.src);
-        });
-    });
-
-    // Cerrar con botón X
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeLightbox();
-        });
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
     }
+});
 
-    // Cerrar haciendo click fuera de la imagen
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target === lightboxImg) {
-            closeLightbox();
-        }
-    });
+// === SCROLL REVEAL ===
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Cerrar con tecla ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            closeLightbox();
-        }
-    });
-
-    // === SCROLL REVEAL ===
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // === HEADER FIJO ===
-    (function() {
-        const nav = document.querySelector('nav');
-        if (nav) {
-            nav.style.position = 'fixed';
-            nav.style.top = '20px';
-            nav.style.left = '50%';
-            nav.style.transform = 'translateX(-50%)';
-            nav.style.transition = 'none';
-            window.addEventListener('scroll', function() {
-                nav.style.top = '20px';
-                nav.style.transform = 'translateX(-50%)';
-            }, { passive: true });
-        }
-    })();
+// === HEADER FIJO ===
+(function() {
+    const nav = document.querySelector('nav');
+    if (nav) {
+        nav.style.position = 'fixed'; nav.style.top = '20px'; nav.style.left = '50%';
+        nav.style.transform = 'translateX(-50%)'; nav.style.transition = 'none';
+        window.addEventListener('scroll', () => { nav.style.top = '20px'; nav.style.transform = 'translateX(-50%)'; }, { passive: true });
+    }
+})();
 </script>
 </body>
-
 </html>
