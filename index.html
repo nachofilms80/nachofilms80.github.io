@@ -76,8 +76,11 @@ nav .container { display: flex; justify-content: space-between; align-items: cen
 header { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; padding-bottom: 15vh; }
 .hero-inner { text-align: center; }
 h1 {
-font-size: clamp(3.5rem, 15vw, 9rem); font-weight: 900; line-height: 0.8;
-margin-bottom: 1.5rem; letter-spacing: -4px; text-transform: uppercase;
+   font-size: clamp(2rem, 8vw, 5rem); font-weight: 900; line-height: 1;
+   margin-bottom: 1.5rem; letter-spacing: -2px; text-transform: uppercase;
+   padding: 0 1rem;   
+   word-wrap: break-word;
+   overflow-wrap: break-word;
 }
 .gradient-text {
 background: linear-gradient(90deg, #fff 0%, var(--accent-color) 25%, #fff 50%, var(--accent-color) 75%, #fff 100%);
@@ -181,8 +184,8 @@ font-size: 3rem; font-weight: 200; cursor: pointer; line-height: 1;
     * { cursor: auto; }
     /* ❌ SIN: #cursor-dot, #cursor-outline { display: none; } → Cursor SIEMPRE visible */
     h1 {
-        font-size: clamp(2rem, 10vw, 4rem) !important;
-        letter-spacing: -2px; line-height: 1.1; padding: 0 1rem;
+        font-size: clamp(1.8rem, 10vw, 3rem) !important;
+        letter-spacing: -1px; line-height: 1.1; padding: 0 1rem;
         word-wrap: break-word; overflow-wrap: break-word;
     }
     .hero-desc { font-size: 1rem; padding: 0 1rem; }
@@ -228,7 +231,7 @@ p { text-align: justify; }
 <div class="hero-overlay"></div>
 </div>
 <div class="hero-inner reveal" style="position: relative; z-index: 2;">
-<h1>Portafolios<br><span class="gradient-text">NF80</span></h1>
+<h1>Bienvenidos<br><span class="gradient-text">a mi portafolio</span></h1>
 <p class="hero-desc" style="text-align: center;">Redefiniendo el estándar creativo y la consistencia de marca.</p>
 </div>
 </header>
