@@ -88,7 +88,19 @@ pointer-events: none;
 }
  
 }
-nav .container { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+nav .container { 
+ display: flex !important; 
+ justify-content: space-between !important; 
+ align-items: center !important;
+ gap: 2rem !important; 
+}
+
+nav .container > div:last-child {
+ white-space: nowrap;
+ font-size: 0.8rem !important;
+ letter-spacing: 1px !important;
+ color: var(--text-muted) !important;
+} 
 .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; color: #fff; text-decoration: none; }
 header { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; padding-bottom: 15vh; }
 .hero-inner { text-align: center; }
