@@ -233,35 +233,37 @@ font-size: 3rem; font-weight: 200; cursor: pointer; line-height: 1;
         margin-left: 0 !important; text-align: left !important;
     }
     
-    /* === NAV MOBILE === */
-    nav {
-        width: 100% !important;
-        top: 0 !important;
-        left: 0 !important;
-        margin-left: 0 !important;
-        border-radius: 0 !important;
-        padding: 0.8rem 1rem !important;
-    }
-    
-    nav .container {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        gap: 1rem !important;
-        flex-wrap: nowrap !important;
-    }
-    
-    .logo {
-        font-size: 0.9rem !important;
-        letter-spacing: -0.5px !important;
-        white-space: nowrap !important;
-    }
-    
-    nav .container > div:last-child {
-        font-size: 0.65rem !important;
-        letter-spacing: 0.5px !important;
-        white-space: nowrap !important;
-    }
+   /* === NAV MOBILE === */
+nav {
+    width: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+    border-radius: 0 !important;
+    padding: 0.8rem 1rem !important;
+    overflow: hidden !important;
+}
+
+nav .container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    flex-wrap: wrap !important;
+}
+
+.logo {
+    font-size: 0.85rem !important;
+    letter-spacing: -0.5px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+}
+
+nav .container > div:last-child {
+    font-size: 0.6rem !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
 }
 
 p { text-align: justify; }
