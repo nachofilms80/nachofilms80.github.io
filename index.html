@@ -477,10 +477,10 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // === HEADER SE ESCONDE AL SCROLL ===
-    let lastScroll = 0;
-    const nav = document.querySelector('nav');
+let lastScroll = 0;
+const nav = document.querySelector('nav');
   
-    window.addEventListener('scroll', () => {
+window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
      
     if (currentScroll > 100 && currentScroll > lastScroll) {
@@ -488,9 +488,10 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
      } else {
      nav.classList.remove('hidden');
      }
-     13
-     lastScroll = currentScroll;
-     }, { passive: true });
+    
+     lastScroll = currentScroll
+}, { passive: true });
+ 
 </script>
 </body>
 </html>
