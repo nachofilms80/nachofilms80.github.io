@@ -210,34 +210,56 @@ font-size: 3rem; font-weight: 200; cursor: pointer; line-height: 1;
 /* === RESPONSIVE MÓVIL (CURSOR SIEMPRE VISIBLE) === */
 @media (max-width: 768px) {
     * { cursor: auto; }
-    /* ❌ SIN: #cursor-dot, #cursor-outline { display: none; } → Cursor SIEMPRE visible */
+    
     h1 {
         font-size: clamp(1.8rem, 10vw, 3rem) !important;
         letter-spacing: -1px; line-height: 1.1; padding: 0 1rem;
         word-wrap: break-word; overflow-wrap: break-word;
     }
+    
     .hero-desc { font-size: 1rem; padding: 0 1rem; }
+    
     section { padding: 80px 0; }
+    
     .gallery-grid { column-count: 1 !important; }
+    
     .case-banner, .case-banner:nth-child(even) {
         flex-direction: column !important; padding: 2rem !important; text-align: left !important;
     }
+    
     .case-content, .case-banner:nth-child(even) .case-content { text-align: left !important; }
+    
     .case-content p, .case-banner:nth-child(even) .case-content p {
         margin-left: 0 !important; text-align: left !important;
-    @media (max-width: 768px) {
-     nav {
-      width: 100% !important;
-      top: 0 !important;
-      left: 0 !important;
-      margin-left: 0 !important;
-      border-radius: 0 !important;
-      padding: 1rem !important;
-     }
-     /* ... resto del código responsive ... */
+    }
+    
+    /* === NAV MOBILE === */
+    nav {
+        width: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin-left: 0 !important;
+        border-radius: 0 !important;
+        padding: 1rem !important;
+    }
+    
+    .logo {
+        font-size: 1rem !important;
+        letter-spacing: -0.5px !important;
+        white-space: nowrap !important;
+    }
+    
+    nav .container > div:last-child {
+        font-size: 0.7rem !important;
+        letter-spacing: 0.5px !important;
+    }
 }
 
 p { text-align: justify; }
+}
+
+p { text-align: justify; }
+ 
 </style>
 </head>
 <body>
