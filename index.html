@@ -367,7 +367,14 @@ section { padding: 120px 0; }
 
 /* === RESPONSIVE MÓVIL === */
 @media (max-width: 768px) {
-    * { cursor: auto; }
+    * { 
+        cursor: auto !important;
+    }
+    
+    /* === OCULTAR CURSOR CUSTOM EN MOBILE === */
+    #cursor-dot, #cursor-outline {
+        display: none !important;
+    }
     
     h1 {
         font-size: clamp(1.8rem, 10vw, 3rem) !important;
@@ -391,7 +398,7 @@ section { padding: 120px 0; }
         margin-left: 0 !important; text-align: left !important;
     }
     
-    /* === NAV MOBILE HAMBURGER === */
+    /* === NAV MOBILE HAMBURGER (FIJO ARRIBA) === */
     nav {
         position: fixed !important;
         width: 100% !important;
@@ -404,6 +411,13 @@ section { padding: 120px 0; }
         padding: 0.8rem 1rem !important;
         justify-content: space-between !important;
         box-sizing: border-box !important;
+    }
+    
+    /* === NAV NO SE ESCONDE EN MOBILE === */
+    nav.hidden {
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
     }
     
     .nav-toggle {
@@ -785,20 +799,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// === NAV HIDE ON SCROLL ===
+// === NAV HIDE ON SCROLL (SOLO DESKTOP) ===
 let lastScroll = 0;
 const nav = document.querySelector('nav');
 
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100 && currentScroll > lastScroll) {
-        nav.classList.add('hidden');
-    } else {
-        nav.classList.remove('hidden');
+    // Solo esconder nav en desktop (más de 768px)
+    if (window.innerWidth > 768) {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100 && currentScroll > lastScroll) {
+            nav.classList.add('hidden');
+        } else {
+            nav.classList.remove('hidden');
+        }
+        
+        lastScroll = currentScroll;
     }
-    
-    lastScroll = currentScroll;
 }, { passive: true });
 
 // === MOBILE MENU TOGGLE ===
