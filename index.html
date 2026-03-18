@@ -76,7 +76,6 @@ body::before {
 .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
-/* === NAV === */
 nav {
     position: fixed;
     top: 20px;
@@ -284,13 +283,13 @@ section { padding: 120px 0; }
 .case-content p { color: var(--text-muted); font-size: 1.1rem; max-width: 500px; }
 .case-banner:nth-child(even) .case-content p { margin-left: auto; }
 .case-visual { flex: 1.2; height: 100%; display: flex; gap: 1.5rem; align-items: center; justify-content: center; }
+.workflow-full { grid-column: 1 / -1; margin-top: 1rem; }
 .visual-box {
     background: #111; border-radius: 20px; border: 1px solid var(--card-border);
     overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); transition: transform 0.5s ease; width: 100%;
 }
 .visual-box:hover { transform: translateY(-10px) scale(1.02); }
 .visual-box img { width: 100%; height: auto; display: block; opacity: 0.9; }
-.workflow-full { grid-column: 1 / -1; margin-top: 1rem; }
 
 #lightbox {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -309,7 +308,6 @@ section { padding: 120px 0; }
     font-size: 3rem; font-weight: 200; cursor: pointer; line-height: 1;
 }
 
-/* === FOOTER CONTACT STYLES === */
 .footer-contact {
     display: flex;
     flex-direction: column;
@@ -364,78 +362,12 @@ section { padding: 120px 0; }
     letter-spacing: 1px;
     margin-top: 0.5rem;
 }
-    
-<!-- Engine Room -->
-<section id="engine-room" class="reveal" style="padding: 100px 0;">
-    <div style="border: 1px solid var(--accent-color); background: rgba(0, 242, 255, 0.01); padding: 3rem 4rem; position: relative; overflow: hidden; border-radius: 40px;">
-        <h2 style="font-size: 4rem; letter-spacing: -3px; margin-bottom: 0; text-transform: uppercase;">Engine Room</h2>
-        <div style="font-family: monospace; font-size: 0.65rem; color: #fff; opacity: 0.7; letter-spacing: 2px; margin-bottom: 3rem;">ESTADO: SOBERANÍA TÉCNICA // NÚCLEO_ENCRIPTADO</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem;">
-            
-            <!-- BLOQUE 1: FLUJO DE TRABAJO -->
-            <div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Flujo de Trabajo</h3>
-                <div style="border-left: 2px solid var(--accent-color); padding-left: 20px; font-family: monospace; font-size: 0.9rem; line-height: 1.1;">
-                    <div style="opacity: 0.5; margin-bottom: 1.8rem;">01. CURATORÍA DE REFERENCIAS EXPERTAS</div>
-                    <div style="color: #fff; margin-bottom: 1.8rem;">02. ANÁLISIS SEMÁNTICO Y ORQUESTACIÓN</div>
-                    <div style="color: var(--accent-color); font-weight: 800; margin-bottom: 1.8rem;">03. VALIDACIÓN DE ESTRUCTURA GENÉTICA</div>
-                    <div style="opacity: 0.5; margin-bottom: 1.8rem;">04. ADAPTACIÓN SEMÁNTICA MULTI-MODELO</div>
-                    <div style="color: #fff; margin-bottom: 1.8rem;">05. PROTOCOLO DE PERSISTENCIA INDUSTRIAL</div>
-                    <div style="color: var(--accent-color); font-weight: 800; margin-bottom: 1.8rem;">06. DIRECCIÓN Y POST-PRODUCCIÓN HUMANA</div>
-                </div>
-            </div>
-            
-            <!-- BLOQUE 2: DOMINIOS DE ESPECIALIZACIÓN -->
-            <div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Dominios de Especialización</h3>
-                <div style="font-family: monospace; font-size: 0.9rem; line-height: 1.3;">
-                    <div style="margin-bottom: 3rem;">
-                        <div style="opacity: 0.5; margin-bottom: 0.3rem;">FOTOGRAFÍA_DE_PRODUCTO</div>
-                        <div style="color: var(--accent-color); margin-bottom: 0.3rem;">CALIBRACIÓN ÓPTICA Y LUMÍNICA</div>
-                        <div>DIRECCIÓN DE LUZ | MACRO_ENGINEERING</div>
-                    </div>
-                    <div style="margin-bottom: 3rem;">
-                        <div style="opacity: 0.5; margin-bottom: 0.3rem;">ARQUITECTURA_DE_PERSONAJES</div>
-                        <div style="color: var(--accent-color); margin-bottom: 0.3rem;">CONSISTENCIA DE DNA Y TEXTURA</div>
-                        <div>NEURAL_ANATOMY | STRUCTURAL_INTEGRITY</div>
-                    </div>
-                    <div>
-                        <div style="opacity: 0.5; margin-bottom: 0.3rem;">DIRECCIÓN_CINEMATOGRÁFICA</div>
-                        <div style="color: var(--accent-color); margin-bottom: 0.3rem;">TEMPORAL_CONSISTENCY | COMFYUI</div>
-                        <div>OPEN_MODELS | HARDCORE_PROMPTING</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- BLOQUE 3: EFICIENCIA -->
-            <div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Eficiencia</h3>
-                <div style="border: 1px solid rgba(0, 242, 255, 0.2); padding: 20px; font-family: monospace; font-size: 0.8rem; background: rgba(0, 242, 255, 0.02); border-radius: 20px;">
-                    <div style="margin-bottom: 15px;">
-                        <span style="display: block; color: var(--accent-color); font-weight: 800; margin-bottom: 5px;">ADAPTABILIDAD TOTAL</span>
-                        <p style="opacity: 0.7; font-size: 0.8rem; margin: 0;">Adaptación a cualquier modelo de IA para control absoluto del resultado.</p>
-                    </div>
-                    <div>
-                        <span style="display: block; color: var(--accent-color); font-weight: 800; margin-bottom: 5px;">OPTIMIZACIÓN DE RECURSOS</span>
-                        <p style="opacity: 0.7; font-size: 0.8rem; margin: 0;">Gestión inteligente de hardware y latencia para producción real de alto nivel.</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #222; text-align: center;">
-            <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; text-align: justify;">
-                <span style="color: var(--accent-color); font-weight: 800; display: block; margin-bottom: 10px;">DIRECTIVA DE AUTORÍA:</span>
-                Soy director creativo con 20 años de oficio y hoy integro la IA como una herramienta estratégica para ofrecerte control total de tu marca, consistencia real en cada pieza, dirección precisa sin azar y procesos replicables que entregan velocidad con calidad y resultados medibles, sin promesas mágicas, solo trabajo bien hecho.
-            </p>
-        </div>
-    </div>
-</section>
 
-/* === RESPONSIVE MÓVIL === */
 @media (max-width: 768px) {
     * { 
         cursor: auto !important;
     }
     
-    /* === OCULTAR CURSOR CUSTOM EN MOBILE === */
     #cursor-dot, #cursor-outline {
         display: none !important;
     }
@@ -454,6 +386,7 @@ section { padding: 120px 0; }
     
     .case-banner, .case-banner:nth-child(even) {
         flex-direction: column !important; padding: 2rem !important; text-align: left !important;
+        gap: 2rem !important;
     }
     
     .case-content, .case-banner:nth-child(even) .case-content { text-align: left !important; }
@@ -462,7 +395,18 @@ section { padding: 120px 0; }
         margin-left: 0 !important; text-align: left !important;
     }
     
-    /* === NAV MOBILE HAMBURGER (FIJO ARRIBA) === */
+    .case-content h3 {
+        text-align: left !important;
+    }
+    
+    .case-content h4 {
+        text-align: left !important;
+    }
+    
+    .case-visual {
+        width: 100% !important;
+    }
+    
     nav {
         position: fixed !important;
         width: 100% !important;
@@ -477,7 +421,6 @@ section { padding: 120px 0; }
         box-sizing: border-box !important;
     }
     
-    /* === NAV NO SE ESCONDE EN MOBILE === */
     nav.hidden {
         opacity: 1 !important;
         transform: none !important;
@@ -567,7 +510,6 @@ section { padding: 120px 0; }
         font-size: 0.85rem !important;
     }
     
-    /* === ENGINE ROOM MOBILE === */
     #engine-room h2 {
         font-size: 2.5rem !important;
         margin-bottom: 1rem !important;
@@ -583,16 +525,12 @@ p { text-align: justify; }
 </head>
 <body>
 
-<!-- Lightbox Modal -->
 <div id="lightbox"><span class="close-lightbox">&times;</span><img src="" alt="Ampliada"></div>
 
-<!-- Custom Cursor -->
 <div id="cursor-dot"></div><div id="cursor-outline"></div>
 
-<!-- Ambient Background -->
 <div class="blob" id="blob-1"></div><div class="blob" id="blob-2"></div><div class="blob" id="blob-3"></div>
 
-<!-- Navigation -->
 <nav>
     <a href="#" class="logo">IGNACIO FUENTES.</a>
     <button class="nav-toggle" aria-label="Toggle menu">
@@ -612,7 +550,6 @@ p { text-align: justify; }
 
 <div class="container">
 
-<!-- Hero Section -->
 <header>
     <div class="hero-video-container">
         <video autoplay muted loop playsinline class="hero-video-bg">
@@ -626,7 +563,6 @@ p { text-align: justify; }
     </div>
 </header>
 
-<!-- Demo Reel Section -->
 <section id="video" class="reveal">
     <div style="margin-bottom: 50px;"><h2 style="font-size: 3.5rem; letter-spacing: -2px;">Demo Reel</h2></div>
     <div style="margin-bottom: 3rem;">
@@ -644,7 +580,6 @@ p { text-align: justify; }
     </div>
 </section>
 
-<!-- Art Book Gallery -->
 <section id="galeria" class="reveal">
     <div style="margin-bottom: 50px;"><h2 style="font-size: 3.5rem; letter-spacing: -2px;">Art Book</h2></div>
     <div class="gallery-grid">
@@ -673,14 +608,12 @@ p { text-align: justify; }
     </div>
 </section>
 
-<!-- Engine Room -->
 <section id="engine-room" class="reveal" style="padding: 100px 0;">
     <div style="border: 1px solid var(--accent-color); background: rgba(0, 242, 255, 0.01); padding: 3rem 4rem; position: relative; overflow: hidden; border-radius: 40px;">
         <h2 style="font-size: 4rem; letter-spacing: -3px; margin-bottom: 0; text-transform: uppercase;">Engine Room</h2>
         <div style="font-family: monospace; font-size: 0.65rem; color: #fff; opacity: 0.7; letter-spacing: 2px; margin-bottom: 3rem;">ESTADO: SOBERANÍA TÉCNICA // NÚCLEO_ENCRIPTADO</div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem;">
             
-            <!-- BLOQUE 1: FLUJO DE TRABAJO -->
             <div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Flujo de Trabajo</h3>
                 <div style="border-left: 2px solid var(--accent-color); padding-left: 20px; font-family: monospace; font-size: 0.9rem; line-height: 1.1;">
                     <div style="opacity: 0.5; margin-bottom: 1.8rem;">01. CURATORÍA DE REFERENCIAS EXPERTAS</div>
@@ -692,7 +625,6 @@ p { text-align: justify; }
                 </div>
             </div>
             
-            <!-- BLOQUE 2: DOMINIOS DE ESPECIALIZACIÓN -->
             <div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Dominios de Especialización</h3>
                 <div style="font-family: monospace; font-size: 0.9rem; line-height: 1.3;">
                     <div style="margin-bottom: 3rem;">
@@ -713,7 +645,6 @@ p { text-align: justify; }
                 </div>
             </div>
             
-            <!-- BLOQUE 3: EFICIENCIA -->
             <div><h3 style="color: var(--accent-color); font-family: monospace; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 1.5rem; text-transform: uppercase;">// Eficiencia</h3>
                 <div style="border: 1px solid rgba(0, 242, 255, 0.2); padding: 20px; font-family: monospace; font-size: 0.8rem; background: rgba(0, 242, 255, 0.02); border-radius: 20px;">
                     <div style="margin-bottom: 15px;">
@@ -737,7 +668,6 @@ p { text-align: justify; }
     </div>
 </section>
 
-<!-- Case Study - Delia -->
 <section id="procesos" class="reveal">
     <div class="case-studies">
         <div style="margin-bottom: 50px;"><h2 style="font-size: 3.5rem; letter-spacing: -2px;">Caso de Estudio</h2></div>
@@ -777,7 +707,6 @@ p { text-align: justify; }
     </div>
 </section>
 
-<!-- CV Section -->
 <section id="cv" class="reveal">
     <div class="cv-card" style="border-width: 2px;">
         <h2>Trayectoria</h2>
@@ -785,7 +714,6 @@ p { text-align: justify; }
     </div>
 </section>
 
-<!-- Footer / Contact -->
 <footer id="contacto">
     <div style="padding-bottom: 4rem; text-align: center;">
         <h3 style="font-size: 3rem; margin-bottom: 2rem; letter-spacing: -2px; text-transform: uppercase;">Contacto</h3>
@@ -801,7 +729,6 @@ p { text-align: justify; }
 </div>
 
 <script>
-// === CURSOR (SIEMPRE VISIBLE) ===
 const dot = document.getElementById('cursor-dot');
 const outline = document.getElementById('cursor-outline');
 const blobs = [document.getElementById('blob-1'), document.getElementById('blob-2'), document.getElementById('blob-3')];
@@ -838,7 +765,6 @@ document.querySelectorAll('a, button, .gallery-item, .video-wrapper').forEach(el
     });
 });
 
-// === LIGHTBOX (SIN OCULTAR CURSOR) ===
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 const closeBtn = document.querySelector('.close-lightbox');
@@ -874,18 +800,15 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// === SCROLL REVEAL ===
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
 }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// === NAV HIDE ON SCROLL (SOLO DESKTOP) ===
 let lastScroll = 0;
 const nav = document.querySelector('nav');
 
 window.addEventListener('scroll', () => {
-    // Solo esconder nav en desktop (más de 768px)
     if (window.innerWidth > 768) {
         const currentScroll = window.pageYOffset;
         
@@ -899,7 +822,6 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
-// === MOBILE MENU TOGGLE ===
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -909,7 +831,6 @@ if (navToggle && navLinks) {
         navLinks.classList.toggle('active');
     });
 
-    // Close menu when clicking a link
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
